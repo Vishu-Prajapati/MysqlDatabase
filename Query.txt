@@ -1,0 +1,90 @@
+/*Insert data in employee table*/
+
+insert into employee (id, first_name, last_name, age, mobile_number, address) values ("1", "Vishal", "Prajapati", "20", "9712998381", "A-204 Siddharth Icon , Gota");
+insert into employee (id, first_name, last_name, age, mobile_number, address) values ("2", "Harsh", "Darji", "22", "6354651660", "T/12 Saundarya Flat , Ghatlodia");
+insert into employee (id, first_name, last_name, age, mobile_number, address) values ("3", "Vikash", "Patel", "18", "9099896862", "11, Dhramnandan Society , Nikol");
+insert into employee (id, first_name, last_name, age, mobile_number, address) values ("4", "Aangi", "Shah", "26", "7043998981", "C-13 C P Colony , Sabarmati");
+
+/*Insert data in hobby table*/
+
+insert into hobby (id, name) values ("1", "Music");
+insert into hobby (id, name) values ("2", "Cricket");
+insert into hobby (id, name) values ("3", "Swimming");
+insert into hobby (id, name) values ("4", "Dancing");
+
+/*Insert data in employee salary table*/
+
+insert into employee_salary (id, salary, date) values ("1", "10000", "2001-10-06");
+insert into employee_salary (id, salary, date) values ("2", "15000", "1999-11-10");
+insert into employee_salary (id, salary, date) values ("3", "25000", "2013-03-25");
+insert into employee_salary (id, salary, date) values ("4", "32000", "2018-09-17");
+
+
+/*Insert data in employee hobby table*/
+
+insert into employee_hobby (id) values ("1");
+insert into employee_hobby (id) values ("2");
+insert into employee_hobby (id) values ("3");
+insert into employee_hobby (id) values ("4");
+
+/*Update data in employee table*/
+
+update employee set first_name = "Nitesh", last_name = "Solanki" where id = 1;
+update employee set first_name = "Nikita", last_name = "Bhatt", age = "10" where id = 2;
+
+/*Update data in hobby table*/
+
+update hobby set name = "Singing" where id = 1;
+update hobby set name = "Playing" where id = 2;
+
+/*Updata data in employee salary table*/
+
+update employee_salary set salary = "50000", date = "1981-04-21" where id = 2;
+update employee_salary set salary = "55000", date = "1991-02-18" where id = 3;
+
+/*Delete data in employee table*/
+
+delete from employee where id = 4;
+delete from employee where id = 3;
+
+/*Delete data in hobby table*/
+
+delete from hobby where id = 3;
+delete from hobby where id = 4;
+
+/*delete data in employee salary table*/
+
+delete from employee_salary where id = 3;
+delete from employee_salary where id = 4;
+
+/*Create a separate select query to get a hobby, employee, employee_salary, employee_hobby.*/
+
+select * from hobby;
+select * from employee;
+select * from employee_salary;
+select * from employee_hobby;
+	
+/*Create a select query to get only employee name, hobby_name*/
+
+select first_name from employee
+union
+select name from hobby;
+
+/*Create a select query to get only employee name, employee_salary*/
+
+select first_name from employee
+union
+select salary from employee_salary;
+
+/*Create a select query to get only employee name, employee_salary, hobby name with comma-separated(you need to use subquery for hobby name).*/
+
+select group_concat(employee.id, employee.first_name , employee_salary.salary, hobby.name)
+from employee
+left join hobby on employee.id=hobby.id
+left join employee_salary on hobby.id=employee_salary.id;
+
+/*Truncate table*/
+
+ truncate table employee;
+
+
