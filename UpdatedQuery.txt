@@ -8,10 +8,11 @@ on employee.id = employee_salary.id;
 (comma-separated - you need to use subquery for hobby name)*/
 
 SELECT 
-    group_concat(u.id), group_concat(u.first_name), 
-    (SELECT group_concat(salary) FROM employee_salary WHERE employee_salary.id = u.id) AS salary,
+    u.id,u.first_name, 
+    (SELECT sum(salary) FROM employee_salary WHERE employee_salary.id = u.id) AS salary,
     (SELECT group_concat(name) FROM hobby WHERE hobby.id IN ( 
         SELECT GROUP_CONCAT(id) FROM employee_salary WHERE employee_salary.id = hobby.id 
         ) 
     ) AS hobby
 FROM employee AS u
+group by u.id
