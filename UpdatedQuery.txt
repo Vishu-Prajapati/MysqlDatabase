@@ -1,9 +1,8 @@
 /*Create a select query to get  employee name, his/her employee_salary*/
 
-SELECT 
-    u.id, u.first_name, 
-    (SELECT salary FROM employee_salary WHERE employee_salary.id = u.id) AS salary
-FROM employee AS u
+select employee.first_name , employee_salary.salary from employee 
+join employee_salary
+on employee.id = employee_salary.id;
 
 /*Create a select query to get employee name, employee_salary, hobby name
 (comma-separated - you need to use subquery for hobby name)*/
