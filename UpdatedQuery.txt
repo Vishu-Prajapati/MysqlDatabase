@@ -1,7 +1,9 @@
 /*Create a select query to get  employee name, his/her employee_salary*/
 
-select first_name from employee union
-select salary from employee_salary;
+SELECT 
+    u.id, u.first_name, 
+    (SELECT salary FROM employee_salary WHERE employee_salary.id = u.id) AS salary
+FROM employee AS u
 
 /*Create a select query to get employee name, employee_salary, hobby name
 (comma-separated - you need to use subquery for hobby name)*/
