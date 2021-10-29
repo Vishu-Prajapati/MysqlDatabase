@@ -1,0 +1,16 @@
+/*Create a select query to get  employee name, his/her employee_salary*/
+
+select first_name from employee union
+select salary from employee_salary;
+
+/*Create a select query to get employee name, employee_salary, hobby name
+(comma-separated - you need to use subquery for hobby name)*/
+
+SELECT 
+    group_concat(u.id), group_concat(u.first_name), 
+    (SELECT group_concat(salary) FROM employee_salary WHERE employee_salary.id = u.id) AS salary,
+    (SELECT group_concat(name) FROM hobby WHERE hobby.id IN ( 
+        SELECT GROUP_CONCAT(id) FROM employee_salary WHERE employee_salary.id = u.id 
+        ) 
+    ) AS hobby
+FROM employee AS u
