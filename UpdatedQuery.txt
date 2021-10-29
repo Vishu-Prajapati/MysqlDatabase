@@ -9,9 +9,9 @@ on employee.id = employee_salary.id;
 
 SELECT 
     u.id,u.first_name, 
-    (SELECT sum(salary) FROM employee_salary WHERE employee_salary.id = u.id) AS salary,
+    (SELECT salary FROM employee_salary WHERE employee_salary.id = u.id) AS salary,
     (SELECT group_concat(name) FROM hobby WHERE hobby.id IN ( 
-        SELECT GROUP_CONCAT(id) FROM employee_salary WHERE employee_salary.id = hobby.id 
+        SELECT id FROM employee_salary WHERE employee_salary.id = hobby.id 
         ) 
     ) AS hobby
 FROM employee AS u
