@@ -7,12 +7,11 @@ on employee.id = employee_salary.id;
 /*Create a select query to get employee name, employee_salary, hobby name
 (comma-separated - you need to use subquery for hobby name)*/
 
-SELECT 
-    u.id,u.first_name, 
-    (SELECT salary FROM employee_salary WHERE employee_salary.id = u.id) AS salary,
-    (SELECT group_concat(name) FROM hobby WHERE hobby.id IN ( 
-        SELECT id FROM employee_salary WHERE employee_salary.id = hobby.id 
-        ) 
-    ) AS hobby
-FROM employee AS u
-group by u.id
+SELECT employee.first_name, employee_salary.salary , group_concat(hobby.name) from employee
+	join employee_salary
+	on employee.id = employee_salary.id ,
+		(SELECT name FROM hobby WHERE hobby.id IN ( 
+			SELECT id FROM employee_salary WHERE employee_salary.id = hobby.id 
+			) 
+		) AS hobby
+	group by employee.id
