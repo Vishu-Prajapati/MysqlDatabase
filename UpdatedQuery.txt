@@ -7,7 +7,7 @@ on employee.id = employee_salary.id;
 /*Create a select query to get employee name, employee_salary, hobby name
 (comma-separated - you need to use subquery for hobby name)*/
 
-SELECT employee.first_name, sum(employee_salary.salary), group_concat(hobby.name) from employee
+SELECT employee.first_name, sum(employee_salary.salary) as total, group_concat(hobby.name) as hobby from employee
 join employee_salary on employee.id = employee_salary.id, 
 (SELECT name FROM hobby)
 AS hobby
