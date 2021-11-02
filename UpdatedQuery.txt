@@ -14,12 +14,10 @@ join employee_salary on employee.id = employee_salary.id,
 AS hobby
 
 --------------------------
-SELECT employee.first_name, employee_salary.salary , group_concat(hobby.name) from employee
-join employee_salary
-on employee.id = employee_salary.id ,
-(SELECT name FROM hobby WHERE hobby.id IN ( 
-SELECT id FROM employee_salary WHERE employee_salary.id = hobby.id 
-) 
-) AS hobby
+SELECT employee.first_name, sum(employee_salary.salary), group_concat(hobby.name) from employee
+join employee_salary on employee.id = employee_salary.id,
+(SELECT name FROM hobby WHERE hobby.id IN 
+( SELECT id FROM employee_salary))
+AS hobby
 group by employee.id
 ---------------------------
