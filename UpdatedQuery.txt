@@ -7,3 +7,13 @@ join employee on employee.id = employee_salary.fk_employe_id;
 (comma-separated - you need to use subquery for hobby name)*/
 
 
+SELECT employee.first_name,
+employee.last_name,
+(
+SELECT group_concat(hobby.name) FROM employee_hobby 
+JOIN hobby ON hobby.id = employee_hobby.fk_hobby_id
+WHERE employee.id = employee_hobby.fk_employe_id
+) hobby,
+SUM(salary) salary FROM employee_salary 
+JOIN employee ON employee.id = employee_salary.fk_employe_id
+GROUP BY employee.id;
