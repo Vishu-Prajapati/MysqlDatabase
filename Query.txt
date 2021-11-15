@@ -78,10 +78,9 @@ select salary from employee_salary;
 
 /*Create a select query to get only employee name, employee_salary, hobby name with comma-separated(you need to use subquery for hobby name).*/
 
-select group_concat(employee.id, employee.first_name , employee_salary.salary, hobby.name)
-from employee
+select group_concat(employee.id, employee.first_name, employee_salary.salary, hobby.name) from employee
 left join hobby on employee.id = hobby.id
-left join employee_salary on hobby.id=employee_salary.id;
+left join employee_salary on hobby.id = employee_salary.id;
 
 /*Truncate table*/
 
