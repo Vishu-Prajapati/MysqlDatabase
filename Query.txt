@@ -80,7 +80,7 @@ select salary from employee_salary;
 
 select group_concat(employee.id, employee.first_name , employee_salary.salary, hobby.name)
 from employee
-left join hobby on employee.id=hobby.id
+left join hobby on employee.id = hobby.id
 left join employee_salary on hobby.id=employee_salary.id;
 
 /*Truncate table*/
