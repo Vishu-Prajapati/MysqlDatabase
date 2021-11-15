@@ -1,15 +1,15 @@
 /*Create a select query to get  employee name, his/her employee_salary*/
 
-select employee.first_name, employee.last_name, employee_salary.salary from employee_salary 
-join employee on employee.id = employee_salary.fk_employe_id;
+SELECT employee.first_name, employee.last_name, employee_salary.salary FROM employee_salary 
+JOIN employee ON employee.id = employee_salary.fk_employe_id;
 
 /*Create a select query to get employee name, employee_salary, hobby name
 (comma-separated - you need to use subquery for hobby name)*/
 
-SELECT concat(emp.first_name," ",emp.last_name) Name, SUM(empsal.salary) as Total_Salary,
+SELECT concat(emp.first_name," ",emp.last_name) AS Name, SUM(empsal.salary) AS Total_Salary,
 (
-	SELECT GROUP_CONCAT(name) as HobbyName FROM employee_hobby as emphobby
-	JOIN hobby h ON h.id = emphobby.fk_hobby_id 
+    SELECT GROUP_CONCAT(name) AS HobbyName FROM employee_hobby AS emphobby
+    JOIN hobby AS h ON h.id = emphobby.fk_hobby_id 
     WHERE emp.id = emphobby.fk_employe_id
 )
 HobbyName FROM employee_salary empsal
